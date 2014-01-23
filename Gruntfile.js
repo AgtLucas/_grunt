@@ -210,8 +210,6 @@ module.exports = function (grunt) {
     },
     // Usemin adds files to concat
     concat: {},
-    // Usemin adds files to uglify
-    uglify: {},
     // Usemin adds files to cssmin
     cssmin: {
       dist: {
@@ -397,7 +395,6 @@ module.exports = function (grunt) {
     'concat',
     'autoprefixer:dist',
     'cssmin',
-    'uglify',
     'imagemin',
     'svgmin',
     'rev',
