@@ -96,6 +96,128 @@ Blz, agora vamos dar uma olhada no `Gruntfile.js`, que é este arquivo onde vamo
 
 {% highlight js %}
 
+'use strict';
+
+// Função modular
+module.exports = function(grunt) {
+
+  // Iniciamos a configuração
+  grunt.initConfig({
+
+    // Busca o package.json
+    pkg: grunt.file.readJSON('package.json');
+
+    // Definimos uma task
+    foo: {
+      options: {
+        bar: true
+      }
+    },
+
+    // Podemos definir outras
+    bar: {
+      build: {
+        nsa: true
+      }
+    }
+
+  });
+
+  // Carregamos as tasks
+  grunt.loadNpmTasks('foo');
+  grunt.loadNpmTasks('bar');
+
+  // Registramos as tasks
+  grunt.registerTask('default', ['foo']);
+
+};
+{% endhighlight %}
+
+Repare que registramos apenas uma task, a `default`, que ao executarmos o comando `grunt` no terminal, será executada as tasks definidas, no caso `foo` e `bar`. Podemos também acessar tasks diretamente, ou seja, se executarmos o comando `grunt foo`, chamaremos a task `foo`.
+
+Talvez este exemplo não tenha ficado claro, então vamos fazer algo útil, vamos instalar os plugins `grunt-contrib-watch` (para "assistir" os arquivos modificados e automaticamente fazer o reload no browser, poupando o trabalho do `F5` ou do `CMD + R`), `grunt-contrib-compass` (requer que você tenha Ruby instalado) e o `grunt-contrib-uglify` (para minificar os arquivos `.js`). No terminal, digite: `npm install grunt-contrib-compass grunt-contrib-uglify --save-dev`. Feito isso, vamos editar nosso `Gruntfile.js`.
+
+{% highlight js %}
+
+'use strict';
+
+// Função modular
+module.exports = function(grunt) {
+
+  // Iniciamos a configuração
+  grunt.initConfig({
+
+    // Busca o package.json
+    pkg: grunt.file.readJSON('package.json');
+
+    // Task: Compass
+    compass: {
+      dist: {
+        options: {
+          sassDir: 'sass',
+          cssDir: 'css',
+          environment: 'production'
+        }
+      }
+    },
+
+    // Task: Uglify
+    uglify: {
+      target: {
+          files: {
+            'dest/output.min.js': ['src/file1.js', 'src/file2.js']
+          }
+        }
+      }
+    },
+
+    // Task: Connect - Faz parte da task watch, cria um servidor Node
+    connect: {
+      options: {
+        port: 9000
+        hostname: 'localhost',
+        livereload: 35729
+      },
+      livereload: {
+        options: {
+          open: true
+        }
+      }
+    },
+
+    // Task: Watch
+    watch: {
+      // Assiste as mudanças nos arquivos compilados pelo Compass
+      compass: {
+        // Todos os arquivos que terminem com a extensão .scss ou .sass
+        // no diretório sass, até os que estão em outros diretórios
+        // dentro do diretório sass
+        files: ['sass/**/*.{.scss,sass}'],
+        tasks: ['compass']
+      },
+      // Assiste as mudanças nos arquivos minificados pelo Uglify
+      uglify: {
+        // Todos os arquivos que terminem com a extensão .js no diretório js
+        files: 'js/*.js',
+        tasks: ['uglify']
+      },
+      // Mudanças nos arquivos HTML
+      html: {
+        files: '*.html'
+      }
+    }
+
+  });
+
+  // Carregamos as tasks
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-compass');
+
+  // Registramos as tasks
+  grunt.registerTask('default', ['connect', 'watch']);
+
+};
 {% endhighlight %}
 
 </article>
@@ -103,12 +225,6 @@ Blz, agora vamos dar uma olhada no `Gruntfile.js`, que é este arquivo onde vamo
 <article>
 
 ##Otimizando o Gruntfile
-
-</article>
-
-<article>
-
-##Plugins
 
 </article>
 

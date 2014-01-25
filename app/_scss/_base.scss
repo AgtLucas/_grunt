@@ -57,4 +57,7 @@ blockquote {
 
 .highlight {
   padding: 5px 40px;
+  overflow-x: scroll;
+  width: 60em;
+  max-width: 100%;
 }
