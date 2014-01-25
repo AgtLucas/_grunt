@@ -67,6 +67,31 @@ Aqui está um exemplo de um `package.json`:
 
 É autoexplicativo...
 
+Repare que ainda não temos nenhuma depedência em nosso `package.json`, então vamos adicionar a primeira, que é o Grunt, sim, antes instalamos o `grunt-cli`, agora precisamos do módulo do Grunt. Para isso temos 2 alternativas, de fato para qualquer plugin, a primeira é definir todas as dependências conforme o exemplo abaixo e em seguida rodar o comando `npm install`:
+
+{% highlight json %}
+
+{
+  "name": "nome-do-projeto",
+  "version": "0.0.0",
+  "description": "Lorem ipsum...",
+  "author": {
+    "name": "Lucas",
+    "url": "http://agtlucas.com"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "foo": "~0.0.1",
+    "bar": "~0.0.1"
+  }
+}
+
+{% endhighlight %}
+
+A segunda alternativa é executar direto o comando `npm install <dependência> --save-dev` (se você quiser, pode passar mais de uma dependência: `npm install <dependência> <dependência-1> <dependência-2> --save-dev`, no nosso caso, `npm install grunt --save-dev`, que economiza o teclado... e o resultado vai ser o mesmo.
+
+Você escolhe, eu geralmente uso as duas formas, depende da situação.
+
 </article>
 
 <article>
