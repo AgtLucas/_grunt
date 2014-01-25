@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: Grunt
 ---
 
 <header class="main-header">
