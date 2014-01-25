@@ -29,6 +29,8 @@ Grunt é um automatizador de tarefas que usa Node.js, criado por <a href="https:
 
 ##Instalação
 
+Partindo do pressuposto que você já tenha o Node.js instalado em sua máquina, você pode continuar a leitura, caso não tenha instalado ainda o Node.js por qualquer motivo, lembre-se que estamos em 2014, instala logo o Node.js e você verá a quantidade de possibilidades que você está perdendo, seja por medo de usar o Terminal/CMD/CLI/Linha de Comando ou pelo fato de você ter passado os últimos anos numa caverna no Tuvalu.
+
 </article>
 
 <article>
