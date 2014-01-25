@@ -44,7 +44,7 @@ Talvez você tenha que executar o comando como Administrador, talvez não, enfim
 
 ##Usando o Grunt
 
-Prosseguindo, agora vamos começar a brincar com o Grunt, para isso precisamos criar 2 arquivos no root do nosso projeto, portanto, crie o arquivo `package.json` e o `Gruntfile.js` (ou `Gruntfile.cofee` se você usa <a href="http://coffeescript.org/" target="_blank">CoffeeScript</a>)
+Prosseguindo, agora vamos começar a brincar com o Grunt, para isso precisamos criar 2 arquivos no root do nosso projeto, portanto, crie o arquivo `package.json` e o `Gruntfile.js` (ou `Gruntfile.coffee` se você usa <a href="http://coffeescript.org/" target="_blank">CoffeeScript</a>)
 
 >E se você utiliza versionamento, certifique-se de colocar o diretório `node_modules` no `.gitignore`!
 
@@ -68,7 +68,7 @@ Aqui está um exemplo de um `package.json`:
 
 É autoexplicativo...
 
-Repare que ainda não temos nenhuma depedência em nosso `package.json`, então vamos adicionar a primeira, que é o Grunt, sim, antes instalamos o `grunt-cli`, agora precisamos do módulo do Grunt. Para isso temos 2 alternativas, de fato para qualquer plugin, a primeira é definir todas as dependências conforme o exemplo abaixo e em seguida rodar o comando `npm install`:
+Repare que ainda não temos nenhuma dependência em nosso `package.json`, então vamos adicionar a primeira, que é o Grunt, sim, antes instalamos o `grunt-cli`, agora precisamos do módulo do Grunt. Para isso temos 2 alternativas, de fato para qualquer plugin, a primeira é definir todas as dependências conforme o exemplo abaixo e em seguida rodar o comando `npm install`:
 
 {% highlight json %}
 
@@ -93,7 +93,7 @@ A segunda alternativa é executar direto o comando `npm install <dependência> -
 
 Você escolhe, eu geralmente uso as duas formas, depende da situação.
 
-Blz, agora vamos dar uma olhada no `Gruntfile.js`, que é este arquivo onde vamos configurar nossas tasks e carregar nossos plugins. Ele basicamente é composto por uma função globar com metódos para configurar, inicializar e registrar tarefas, vejamos um exemplo:
+Blz, agora vamos dar uma olhada no `Gruntfile.js`, que é este arquivo onde vamos configurar nossas tasks e carregar nossos plugins. Ele basicamente é composto por uma função global com metódos para configurar, inicializar e registrar tarefas, vejamos um exemplo:
 
 {% highlight js %}
 
