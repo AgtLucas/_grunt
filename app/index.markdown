@@ -92,6 +92,12 @@ A segunda alternativa é executar direto o comando `npm install <dependência> -
 
 Você escolhe, eu geralmente uso as duas formas, depende da situação.
 
+Blz, agora vamos dar uma olhada no `Gruntfile.js`, que é este arquivo onde vamos configurar nossas tasks e carregar nossos plugins. Ele basicamente é composto por uma função globar com metódos para configurar, inicializar e registrar tarefas, vejamos um exemplo:
+
+{% highlight js %}
+
+{% endhighlight %}
+
 </article>
 
 <article>
