@@ -51,6 +51,22 @@ Anyway, o `package.json` é um arquivo que vai listar todas as dependências do 
 
 >“Todo projeto Node.js é chamado de módulo, mas o que é um módulo? O termo módulo surgiu do conceito de que a arquitetura do Node.js é modular. E todo módulo é acompanhado de um arquivo descritor, conhecido pelo nome de package.json.” - <a href="http://www.casadocodigo.com.br/products/livro-nodejs" target="_blank">Caio Ribeiro Pereira. “Aplicações web real-time com Node.js.”</a>
 
+Aqui está um exemplo de um `package.json`:
+
+{% highlight json %}
+{
+  "name": "nome-do-projeto",
+  "version": "0.0.0",
+  "description": "Lorem ipsum...",
+  "author": {
+    "name": "Lucas",
+    "url": "http://agtlucas.com"
+  }
+}
+{% endhighlight %}
+
+É autoexplicativo...
+
 </article>
 
 <article>
