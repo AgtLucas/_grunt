@@ -5,6 +5,7 @@ title: Home
 
 <header class="main-header">
   <h1 class="logo">Grunt</h1>
+  <small>Artigo criado e mantido por: <a href="https://github.com/AgtLucas" target="_blank">Lucas</a></small>
 </header>
 
 <section class="main-content">
@@ -96,6 +97,7 @@ Blz, agora vamos dar uma olhada no `Gruntfile.js`, que é este arquivo onde vamo
 
 {% highlight js %}
 
+// ECMAScript 5' strict mode
 'use strict';
 
 // Função modular
@@ -139,6 +141,7 @@ Talvez este exemplo não tenha ficado claro, então vamos fazer algo útil, vamo
 
 {% highlight js %}
 
+// ECMAScript 5' strict mode
 'use strict';
 
 // Função modular
@@ -165,7 +168,7 @@ module.exports = function(grunt) {
     uglify: {
       target: {
           files: {
-            'dest/output.min.js': ['src/file1.js', 'src/file2.js']
+            'build/output.min.js': ['src/input.js']
           }
         }
       }
@@ -218,7 +221,10 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['connect', 'watch']);
 
 };
+
 {% endhighlight %}
+
+Acredito que tenha ficado mais fácil de entender agora.
 
 </article>
 
@@ -226,11 +232,184 @@ module.exports = function(grunt) {
 
 ##Otimizando o Gruntfile
 
+Você reparou que a cada plugin que você instala, você tem que chamar ele no `Gruntfile.js`, e isso é um processo manual, o que não faz muito sentido, já que nosso objetivo é automatizar ao máximo nossas tarefas repetitivas. Mas adivinha, temos um plugin que carrega automaticamente nossos plugins, o salvador da pátria é o `load-grunt-task` criado pelo <a href="https://github.com/sindresorhus" target="_blank">Sindre Sorhus</a>. Vamos instalar ele: `npm install load-grunt-tasks --save-dev` e vamos editar nosso `Gruntfile.js`:
+
+{% highlight js %}
+
+// ECMAScript 5' strict mode
+'use strict';
+
+// Função modular
+module.exports = function(grunt) {
+
+  // Carregamos as tasks
+  require('load-grunt-tasks')(grunt);
+
+  // Iniciamos a configuração
+  grunt.initConfig({
+
+    // Busca o package.json
+    pkg: grunt.file.readJSON('package.json');
+
+    // Tasks...
+
+  });
+
+  // Registramos as tasks
+  grunt.registerTask('default', ['connect', 'watch']);
+
+};
+
+{% endhighlight %}
+
+Bem melhor, não?
+
+Antes:
+
+{% highlight js %}
+...
+grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-compass');
+
+{% endhighlight %}
+
+Depois:
+
+{% highlight js %}
+require('load-grunt-tasks')(grunt);
+{% endhighlight %}
+
+Outra forma de otimizar nosso `Gruntfile.js`, é definir variáveis/paths dos diretórios que usamos, podemos fazer isso da seguinte forma:
+
+{% highlight js %}
+...
+meta {
+  srcPathSass: 'src/sass',
+  srcPathJS: 'src/js',
+  buildPathCSS: 'build/css',
+  buildPathJS: 'build/js'
+}
+...
+{% endhighlight %}
+
+E nosso `Gruntfile.js` fica da seguinte forma:
+
+{% highlight js %}
+
+// ECMAScript 5' strict mode
+'use strict';
+
+// Função modular
+module.exports = function(grunt) {
+
+  // Carregamos as tasks
+  require('load-grunt-tasks')(grunt);
+
+  // Iniciamos a configuração
+  grunt.initConfig({
+
+    // Busca o package.json
+    pkg: grunt.file.readJSON('package.json');
+
+    // Paths
+    meta {
+      srcPathSass: 'src/sass/',
+      srcPathJS: 'src/js/',
+      buildPathCSS: 'build/css/'
+    }
+
+    // Task: Compass
+    compass: {
+      dist: {
+        options: {
+          sassDir: '<%= meta.srcPathSass %>',
+          cssDir: '<%= meta.buildPathCSS %>',
+          environment: 'production'
+        }
+      }
+    },
+
+    // Task: Uglify
+    uglify: {
+      target: {
+          files: {
+            '<%= meta.buildPathJS %>/output.min.js': ['<%= meta.srcPathJS %>/input.js']
+          }
+        }
+      }
+    },
+
+    // Task: Connect - Faz parte da task watch, cria um servidor Node
+    connect: {
+      options: {
+        port: 9000
+        hostname: 'localhost',
+        livereload: 35729
+      },
+      livereload: {
+        options: {
+          open: true
+        }
+      }
+    },
+
+    // Task: Watch
+    watch: {
+      // Assiste as mudanças nos arquivos compilados pelo Compass
+      compass: {
+        // Todos os arquivos que terminem com a extensão .scss ou .sass
+        // no diretório sass, até os que estão em outros diretórios
+        // dentro do diretório sass
+        files: ['<%= meta.srcPathSass %>/**/*.{.scss,sass}'],
+        tasks: ['compass']
+      },
+      // Assiste as mudanças nos arquivos minificados pelo Uglify
+      uglify: {
+        // Todos os arquivos que terminem com a extensão .js no diretório js
+        files: '<%= meta.srcPathJS %>/*.js',
+        tasks: ['uglify']
+      },
+      // Mudanças nos arquivos HTML
+      html: {
+        files: '*.html'
+      }
+    }
+
+  });
+
+  // Registramos as tasks
+  grunt.registerTask('default', ['connect', 'watch']);
+
+};
+
+{% endhighlight %}
+
+Definir essas paths é muito útil quando temos vários diretórios.
+
 </article>
 
 <article>
 
-##Yeoman
+##Conclusão
+
+Grunt é daquelas ferramentes que vicia, você usa em um projeto é quer usar em todos os outros projetos. Isso foi apenas um resumo do básico, existe muito mais a ser explorado e, um bom lugar para começar isso é o próprio site do Grunt: <a href="http://gruntjs.com" target="_blank">gruntjs.com</a>.
+
+</article>
+
+<article>
+
+##Licença
+
+**COM EXCEÇÃO DOS LINKS DE OUTROS AUTORES AQUI CITADOS**:
+
+{% highlight bash %}
+
+IDNC = I DO NOT CARE
+
+USE DA FORMA QUE QUISER, POR SUA CONTA E RISCO.
+FIQUE A VONTADE PARA COPIAR, REPLICAR O CONTEÚDO AQUI DESCRITO, NÃO PRECISA NEM CITAR A FONTE, SE ISSO VAI AJUDAR ALGUÉM DE ALGUMA FORMA JÁ ESTÁ VALENDO.
+{% endhighlight %}
 
 </article>
 
