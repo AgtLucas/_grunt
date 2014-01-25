@@ -3,6 +3,7 @@ body {
   color: #222;
   font-family: 'Open Sans', sans-serif;
   font-size: 1em;
+  line-height: 1.5;
 }
 
 article {
@@ -13,6 +14,9 @@ article {
   width: 60em;
   max-width: 100%;
   margin: auto;
+  p {
+    font-size: 1.2em;
+  }
 }
 
 .main-header {
