@@ -137,7 +137,7 @@ module.exports = function(grunt) {
 
 Repare que registramos apenas uma task, a `default`, que ao executarmos o comando `grunt` no terminal, será executada as tasks definidas, no caso `foo` e `bar`. Podemos também acessar tasks diretamente, ou seja, se executarmos o comando `grunt foo`, chamaremos a task `foo`.
 
-Talvez este exemplo não tenha ficado claro, então vamos fazer algo útil, vamos instalar os plugins `grunt-contrib-watch` (para "assistir" os arquivos modificados e automaticamente fazer o reload no browser, poupando o trabalho do `F5` ou do `CMD + R`), `grunt-contrib-compass` (requer que você tenha Ruby instalado) e o `grunt-contrib-uglify` (para minificar os arquivos `.js`). No terminal, digite: `npm install grunt-contrib-compass grunt-contrib-uglify --save-dev`. Feito isso, vamos editar nosso `Gruntfile.js`.
+Talvez este exemplo não tenha ficado claro, então vamos fazer algo útil, vamos instalar os plugins `grunt-contrib-watch` + `grunt-contrib-connect` (para "assistir" os arquivos modificados e automaticamente fazer o reload no browser, poupando o trabalho do `F5` ou do `CMD + R`), `grunt-contrib-compass` (requer que você tenha Ruby instalado) e o `grunt-contrib-uglify` (para minificar os arquivos `.js`). No terminal, digite: `npm install grunt-contrib-connect grunt-contrib-compass grunt-contrib-uglify --save-dev`. Feito isso, vamos editar nosso `Gruntfile.js`.
 
 {% highlight js %}
 
